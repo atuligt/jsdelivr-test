@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsDelivr Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .demo-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    .result {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <h1>UtilHelpers.js Demo</h1>
+  <p>This page demonstrates the functionality of the UtilHelpers library loaded via jsDelivr.</p>
+  
+  <!-- formatNumber demo -->
+  <div class="demo-section">
+    <h2>Format Number</h2>
+    <p>Adds commas as thousand separators to numbers.</p>
+    <input type="number" id="numberInput" value="1234567" />
+    <button onclick="formatNumberDemo()">Format</button>
+    <div class="result" id="formatNumberResult"></div>
+    <code>UtilHelpers.formatNumber(1234567) // Returns "1,234,567"</code>
+  </div>
+  
+  <!-- randomInt demo -->
+  <div class="demo-section">
+    <h2>Random Integer</h2>
+    <p>Generates a random integer between min and max values (inclusive).</p>
+    <input type="number" id="minInput" value="1" placeholder="Min" />
+    <input type="number" id="maxInput" value="100" placeholder="Max" />
+    <button onclick="randomIntDemo()">Generate</button>
+    <div class="result" id="randomIntResult"></div>
+    <code>UtilHelpers.randomInt(1, 100) // Returns a random number between 1 and 100</code>
+  </div>
+  
+  <!-- debounce demo -->
+  <div class="demo-section">
+    <h2>Debounce</h2>
+    <p>Type quickly in the field below and see how the debounced function only executes after you stop typing.</p>
+    <input type="text" id="debounceInput" placeholder="Type something..." />
+    <div class="result" id="debounceResult">Waiting for you to stop typing...</div>
+    <code>const debouncedFunction = UtilHelpers.debounce(myFunction, 500);</code>
+  </div>
+  
+  <!-- slugify demo -->
+  <div class="demo-section">
+    <h2>Slugify</h2>
+    <p>Converts a string into a URL-friendly slug.</p>
+    <input type="text" id="slugInput" value="Hello World! This is a test." />
+    <button onclick="slugifyDemo()">Slugify</button>
+    <div class="result" id="slugifyResult"></div>
+    <code>UtilHelpers.slugify("Hello World! This is a test.") // Returns "hello-world-this-is-a-test"</code>
+  </div>
+  
+  <!-- shuffleArray demo -->
+  <div class="demo-section">
+    <h2>Shuffle Array</h2>
+    <p>Randomly shuffles the elements of an array.</p>
+    <button onclick="shuffleArrayDemo()">Shuffle</button>
+    <div class="result" id="shuffleArrayResult"></div>
+    <code>UtilHelpers.shuffleArray([1, 2, 3, 4, 5]) // Returns array with elements in random order</code>
+  </div>
+  
+  <!-- getCurrentDate demo -->
+  <div class="demo-section">
+    <h2>Current Date</h2>
+    <p>Gets the current date in YYYY-MM-DD format.</p>
+    <button onclick="getCurrentDateDemo()">Get Date</button>
+    <div class="result" id="getCurrentDateResult"></div>
+    <code>UtilHelpers.getCurrentDate() // Returns current date in YYYY-MM-DD format</code>
+  </div>
+
+  <!-- Load the script from jsDelivr -->
+  <!-- Replace the URL with your actual jsDelivr link once you've published your script -->
+  <script src="https://cdn.jsdelivr.net/gh/yourusername/your-repo@version/util-helpers.js"></script>
+  
+  <script>
+    // Demo functions
+    function formatNumberDemo() {
+      const number = document.getElementById('numberInput').value;
+      const result = UtilHelpers.formatNumber(number);
+      document.getElementById('formatNumberResult').textContent = result;
+    }
+    
+    function randomIntDemo() {
+      const min = parseInt(document.getElementById('minInput').value);
+      const max = parseInt(document.getElementById('maxInput').value);
+      const result = UtilHelpers.randomInt(min, max);
+      document.getElementById('randomIntResult').textContent = result;
+    }
+    
+    function slugifyDemo() {
+      const text = document.getElementById('slugInput').value;
+      const result = UtilHelpers.slugify(text);
+      document.getElementById('slugifyResult').textContent = result;
+    }
+    
+    function shuffleArrayDemo() {
+      const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const result = UtilHelpers.shuffleArray(array);
+      document.getElementById('shuffleArrayResult').textContent = 'Original: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nShuffled: [' + result.join(', ') + ']';
+    }
+    
+    function getCurrentDateDemo() {
+      const result = UtilHelpers.getCurrentDate();
+      document.getElementById('getCurrentDateResult').textContent = result;
+    }
+    
+    // Setup debounce demo
+    const updateDebounceResult = UtilHelpers.debounce(function(text) {
+      document.getElementById('debounceResult').textContent = 'You typed: ' + text;
+    }, 500);
+    
+    document.getElementById('debounceInput').addEventListener('input', function(e) {
+      document.getElementById('debounceResult').textContent = 'Waiting for you to stop typing...';
+      updateDebounceResult(e.target.value);
+    });
+    
+    // Initialize demos on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      formatNumberDemo();
+      randomIntDemo();
+      slugifyDemo();
+      getCurrentDateDemo();
+    });
+  </script>
+</body>
+</html>
